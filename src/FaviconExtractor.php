@@ -6,6 +6,7 @@ namespace StefanBauer\LaravelFaviconExtractor;
 
 use Illuminate\Support\Facades\Storage;
 use StefanBauer\LaravelFaviconExtractor\Exception\FaviconCouldNotBeSavedException;
+use StefanBauer\LaravelFaviconExtractor\Exception\FaviconDoesNotExistException;
 use StefanBauer\LaravelFaviconExtractor\Exception\InvalidUrlException;
 use StefanBauer\LaravelFaviconExtractor\Favicon\FaviconFactoryInterface;
 use StefanBauer\LaravelFaviconExtractor\Favicon\FaviconInterface;
@@ -56,6 +57,13 @@ class FaviconExtractor implements FaviconExtractorInterface
 
         $favicon = $this->fetchOnly();
         $targetPath = $this->getTargetPath($path, $filename);
+
+        if (! file_exists($favicon->getContent())) {
+            throw new FaviconDoesNotExistException(sprintf(
+                'No favicons named %s exist at path "%s" ',
+                $this->getUrl(), $targetPath
+            ));
+        }
 
         if (!Storage::put($targetPath, file_get_contents($favicon->getContent()))) {
             throw new FaviconCouldNotBeSavedException(sprintf(

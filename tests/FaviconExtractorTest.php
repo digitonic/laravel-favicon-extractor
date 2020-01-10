@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Mockery\MockInterface;
 use Orchestra\Testbench\TestCase;
 use StefanBauer\LaravelFaviconExtractor\Exception\FaviconCouldNotBeSavedException;
+use StefanBauer\LaravelFaviconExtractor\Exception\FaviconDoesNotExistException;
 use StefanBauer\LaravelFaviconExtractor\Exception\InvalidUrlException;
 use StefanBauer\LaravelFaviconExtractor\Favicon\Favicon;
 use StefanBauer\LaravelFaviconExtractor\Favicon\FaviconFactoryInterface;
@@ -128,21 +129,12 @@ class FaviconExtractorTest extends TestCase
         $this->faviconFactory
             ->shouldReceive('create')
             ->withAnyArgs()
-            ->andReturn($expectedFavicon)
-        ;
+            ->andReturn($expectedFavicon);
 
         Storage::fake();
-        Storage::
-        shouldReceive('put')
-            ->once()
-            ->andReturn(false)
-        ;
 
-        $this->expectException(FaviconCouldNotBeSavedException::class);
+        $this->expectException(FaviconDoesNotExistException::class);
 
-        $this->extractor
-            ->fromUrl('http://example.com')
-            ->fetchAndSaveTo('some-path', 'a-filename')
-        ;
+        $this->extractor->fromUrl('http://example.com')->fetchAndSaveTo('some-path', 'a-filename');
     }
 }
