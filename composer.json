@@ -1,18 +1,21 @@
 {
-    "name": "stefanbauer/laravel-favicon-extractor",
+    "name": "digitonic/laravel-favicon-extractor",
     "description": "A favicon extractor for Laravel",
     "keywords": [
         "stefanbauer",
         "laravel-favicon-extractor",
         "favicon"
     ],
-    "homepage": "https://github.com/stefanbauer/laravel-favicon-extractor",
     "license": "MIT",
     "authors": [
         {
             "name": "Stefan Bauer",
             "email": "mail@stefanbauer.me",
             "homepage": "https://stefanbauer.me"
+        },
+        {
+            "name": "Christopher Crawford",
+            "email": "christopher@digitonic.co.uk"
         }
     ],
     "require": {

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'provider_class' => \StefanBauer\LaravelFaviconExtractor\Provider\GoogleProvider::class,
+    'provider_class' => \StefanBauer\LaravelFaviconExtractor\Provider\FaviconGrabberProvider::class,
 
     /*
     |--------------------------------------------------------------------------
