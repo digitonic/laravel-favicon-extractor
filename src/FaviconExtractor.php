@@ -58,13 +58,6 @@ class FaviconExtractor implements FaviconExtractorInterface
         $favicon = $this->fetchOnly();
         $targetPath = $this->getTargetPath($path, $filename);
 
-        if (! file_exists($favicon->getContent())) {
-            throw new FaviconDoesNotExistException(sprintf(
-                'No favicons named %s exist at path "%s" ',
-                $this->getUrl(), $targetPath
-            ));
-        }
-
         if (!Storage::put($targetPath, file_get_contents($favicon->getContent()))) {
             throw new FaviconCouldNotBeSavedException(sprintf(
                 'The favicon of %s could not be saved at path "%s" ',
