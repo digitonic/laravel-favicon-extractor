@@ -11,7 +11,7 @@ class FaviconGrabberProvider implements ProviderInterface
     {
         $url = parse_url($url);
         $client = GuzzleFactory::make();
-        $response = $client->get($this->getUrl($url['host']));
+        $response = $client->get($this->getUrl($url['path']));
         $icons = json_decode($response->getBody()->getContents(), true)['icons'];
 
         if ($icons === null) {
